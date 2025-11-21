@@ -123,8 +123,8 @@ static void *mem_guardalloc(int alloc_size, int guard_size)
    alloc_size = (alloc_size + 3) & ~3;
 
    /* allocate memory */
-   // orig = malloc(alloc_size + (guard_size * 2));
-   orig = mem_alloc(alloc_size + (guard_size * 2), true);
+   orig = malloc(alloc_size + (guard_size * 2));
+   // orig = mem_alloc(alloc_size + (guard_size * 2), true);
    if (NULL == orig)
       return NULL;
 
@@ -185,8 +185,8 @@ static void mem_init(void)
 
    mem_blockcount = 0;
 
-   // mem_record = malloc(MAX_BLOCKS * sizeof(memblock_t));
-   mem_record = mem_alloc(MAX_BLOCKS * sizeof(memblock_t), false);
+   mem_record = malloc(MAX_BLOCKS * sizeof(memblock_t));
+   // mem_record = mem_alloc(MAX_BLOCKS * sizeof(memblock_t), false);
 
    ASSERT(mem_record);
    memset(mem_record, 0, MAX_BLOCKS * sizeof(memblock_t));
@@ -255,8 +255,8 @@ void *_my_malloc(int size, char *file, int line)
    if (false != mem_debug)
       temp = mem_guardalloc(size, GUARD_LENGTH);
    else
-      // temp = malloc(size);
-      temp = mem_alloc(size, true);
+      temp = malloc(size);
+      // temp = mem_alloc(size, true);
 
    nofrendo_log_printf("_my_malloc: %d at %s:%d\n", size, file, line);
    if (NULL == temp)
@@ -331,8 +331,8 @@ void *_my_malloc(int size)
    void *temp;
    char fail[256];
 
-   // temp = malloc(size);
-   temp = mem_alloc(size, true);
+   temp = malloc(size);
+   // temp = mem_alloc(size, true);
 
    if (NULL == temp)
    {
